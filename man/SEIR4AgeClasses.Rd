@@ -1,0 +1,88 @@
+\name{SEIR4AgeClasses}
+\alias{SEIR4AgeClasses}
+\title{SEIR model with 4 age classes and yearly aging (P 3.4).}
+\usage{
+SEIR4AgeClasses(pars = NULL, init = NULL, time = NULL, ...)
+}
+\arguments{
+  \item{pars}{\code{\link{list}} with: a matrix with the
+  transmission rates, the rate at which individuals move
+  from the exposed to the infectious classes, the recovery
+  rate, a \code{\link{vector}} with death rates in each age
+  group, and a \code{\link{vector}} with birth rates into
+  the childhood class. The names of these elements must be
+  "beta", "sigma", "gamma", "mu", and "nu", respectively,
+  see example. All rates are specified in days. Moreover, a
+  \code{\link{vector}} n with the proportion of each age
+  group. All parameters must be positive.}
+
+  \item{init}{\code{\link{vector}} with 16 values: initial
+  proportions of the population that are susceptible,
+  exposed, infectious and recovered in a particular age
+  group. The vector must be named, see example.
+  Requirements: S + E + I <= n for each age group and all
+  values must be positive.}
+
+  \item{time}{time sequence for which output is wanted; the
+  first value of times must be the initial time.}
+
+  \item{...}{further arguments passed to
+  \link[deSolve]{ode} function.}
+}
+\value{
+\code{\link{list}} of class \code{SolveSIR4ACYA}. The first
+element, \code{*$model}, is the model function. The second,
+third and fourth elements are vectors (\code{*$pars},
+\code{*$init}, \code{*$time}, respectively) containing the
+\code{pars}, \code{init} and \code{time} arguments of the
+function. The fifth element \code{*$results} is a
+\code{\link{data.frame}} with up to as many rows as
+elements in time. First column contains the time. The
+following columns contain the proportion of susceptibles,
+exposed, infectious and recovered.
+}
+\description{
+Solves a SEIR model with four different age-groups and
+yearly "movements" between the groups mimicking the school
+year
+}
+\details{
+This is the R version of program 3.4 from page 87 of
+"Modeling Infectious Disease in humans and animals" by
+Keeling & Rohani.
+}
+\examples{
+# Parameters and initial conditions.
+
+parameters <- list(beta = matrix(c(2.089, 2.089, 2.086, 2.037,
+                                   2.089, 9.336, 2.086, 2.037,
+                                   2.086, 2.086, 2.086, 2.037,
+                                   2.037, 2.037, 2.037, 2.037),
+                                 nrow = 4, ncol = 4),
+                    sigma = 0.125, gamma = 0.2,
+                    mu = c(0, 0, 0, 1) / (55 * 365),
+                    nu = c(1 / (55 * 365), 0, 0, 0),
+                    n = c(6, 4, 10, 55) / 75)
+
+initials <- c(S = c(0.05, 0.01, 0.01, 0.008),
+              E = c(0.0001, 0.0001, 0.0001, 0.0001),
+              I = c(0.0001, 0.0001, 0.0001, 0.0001),
+              R = c(0.0298, 0.04313333, 0.12313333, 0.72513333))
+
+# Solve the system.
+# Uncomment the following lines:
+# seir4.age.classes <- SEIR4AgeClasses(pars = parameters,
+#                                      init = initials,
+#                                      time = 0:36500)
+}
+\references{
+Keeling, Matt J., and Pejman Rohani. Modeling infectious
+diseases in humans and animals. Princeton University Press,
+2008.
+\href{http://www.modelinginfectiousdiseases.org/}{Modeling
+Infectious Diseases in Humans and Animals}
+}
+\seealso{
+\link[deSolve]{ode}.
+}
+

@@ -1,0 +1,75 @@
+\name{SISinusoidalTransmBrith}
+\alias{SISinusoidalTransmBrith}
+\title{Rabbit Hemorrhagic Disease model with sinusoidal transmission rate and per capita birth rate (P 5.4).}
+\usage{
+SISinusoidalTransmBrith(pars = NULL, init = NULL, time = NULL, ...)
+}
+\arguments{
+  \item{pars}{\code{\link{list}} with: the mean
+  transmission rate, the amplitude of sinuoidal forcing
+  (transmission), the mean birth rate, the amplitude of
+  sinuoidal forcing for the birth rate, the frequency of
+  the oscillations, the recovery rate, the per capita death
+  rate, the mortality rate due to infection, and the
+  carrying capacity. The names of these values must be
+  "beta0", "beta1", "alpha0", "alpha1", "w", "gamma", "mu",
+  "m" and "K", respectively. All parameters must be
+  positive, alpha1, beta1 <= 1.}
+
+  \item{init}{\code{\link{vector}} with 3 values: the
+  initial numbers of susceptible hosts (rabbits),
+  infectious hosts (rabbits) and total population size. The
+  names of these values must be "X", "Y" and "N",
+  respectively. All initial values must be positive and
+  X(0) + Y(0) <= N(0).}
+
+  \item{time}{time sequence for which output is wanted; the
+  first value of times must be the initial time.}
+
+  \item{...}{further arguments passed to
+  \link[deSolve]{ode} function.}
+}
+\value{
+\code{\link{list}}. The first element, \code{*$model}, is
+the model function. The second element is a list with the
+\code{*$pars} argument. The third and fourth elements are
+the vectors \code{*$init} and \code{*$time}, containing the
+\code{init} and \code{time} arguments of the function. The
+fifth element \code{*$results} is a
+\code{\link{data.frame}} with up to as many rows as
+elements in time. First column contains the time. Second,
+third and fourth columns contain the number of
+susceptibles, infectious and recovered.
+}
+\description{
+Solves the Rabbit Hemorrhagic Disease, in which both
+transmission rate and birth rates can be seasonally forced.
+}
+\details{
+This is the R version of program 5.4 from page 186 of
+"Modeling Infectious Disease in humans and animals" by
+Keeling & Rohani.
+}
+\examples{
+# Parameters and initial conditions.
+parameters <- list(beta0 = 0.936, beta1 = 0.1, alpha0 = 0.02, alpha1 = 0.1,
+                   w = 2 * pi / 365, gamma = 0.025,  mu = 0.01, m = 0.475,
+                   K = 10000)
+initials <- c(X = 0.5, Y = 0.01, N = 0.6)
+
+# Solve the system.
+sis.rhdm <- SISinusoidalTransmBrith(pars = parameters,
+                                    init = initials,
+                                    time = 0:(60 * 365))
+}
+\references{
+Keeling, Matt J., and Pejman Rohani. Modeling infectious
+diseases in humans and animals. Princeton University Press,
+2008.
+\href{http://www.modelinginfectiousdiseases.org/}{Modeling
+Infectious Diseases in Humans and Animals}.
+}
+\seealso{
+\link[deSolve]{ode}.
+}
+

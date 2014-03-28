@@ -1,0 +1,72 @@
+\name{SEIRnStages}
+\alias{SEIRnStages}
+\title{SEIR model with n stages (P 3.5).}
+\usage{
+SEIRnStages(pars = NULL, init = NULL, time = NULL, ...)
+}
+\arguments{
+  \item{pars}{\code{\link{vector}} with 5 values: the
+  transmission rate, the removal or recovery rate, the
+  death rate (we assume that nu=mu), the number of stages
+  in the infected period and the number of stages in the
+  exposed period. The names of these elements must be
+  "beta", "gamma", "mu", "n" and "m", respectively, see
+  example. All rates are specified in days and all rates
+  and parameters must be positive, moreover, m < n.}
+
+  \item{init}{\code{\link{vector}} with n + 1 values:
+  initial proportions of the population that are
+  susceptible and infected. The vector must be named, see
+  example. Requirements: S + all Infected <= 1.}
+
+  \item{time}{time sequence for which output is wanted; the
+  first value of times must be the initial time.}
+
+  \item{...}{further arguments passed to
+  \link[deSolve]{ode} function.}
+}
+\value{
+\code{\link{list}}. The first element, \code{*$model}, is
+the model function. The second, third and fourth elements
+are vectors (\code{*$pars}, \code{*$init}, \code{*$time},
+respectively) containing the \code{pars}, \code{init} and
+\code{time} arguments of the function. The fifth element
+\code{*$results} is a \code{\link{data.frame}} with up to
+as many rows as elements in time. First column contains the
+time. The following columns contain the proportion of
+susceptibles and infected.
+}
+\description{
+Solves a SEIR model with multiple stages to create
+gamma-distributed exposed and infectious periods.
+}
+\details{
+This is the R version of program 3.5 from page 94 of
+"Modeling Infectious Disease in humans and animals" by
+Keeling & Rohani.
+}
+\examples{
+# Parameters and initial conditions.
+n <- 13
+parameters <- list(beta = 17 / 5, gamma = 1 / 13, mu = 1 / (55 * 365),
+                   n = n, m = 8)
+
+initials <- c(S = 0.05, I = 0.00001 * rep(1, n) / n)
+
+# Solve the system.
+# Uncomment the following lines:
+#seir.n.stages <- SEIRnStages(pars = parameters,
+#                              init = initials,
+#                              time = seq(1, 30*365, 1))
+}
+\references{
+Keeling, Matt J., and Pejman Rohani. Modeling infectious
+diseases in humans and animals. Princeton University Press,
+2008.
+\href{http://www.modelinginfectiousdiseases.org/}{Modeling
+Infectious Diseases in Humans and Animals}
+}
+\seealso{
+\link[deSolve]{ode}.
+}
+

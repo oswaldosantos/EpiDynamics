@@ -1,0 +1,18 @@
+Package: EpiDynamics
+Type: Package
+Title: Dynamic Models in Epidemiology
+Depends:
+    R (>= 3.0.2)
+Imports:
+    deSolve,
+    FME
+Description: Dynamic Models in Epidemiology.
+License: GPL (>= 2)
+LazyLoad: yes
+URL: https://github.com/oswaldosantos/EpiDynamics
+Authors@R: c(person(given='Oswaldo', family='Santos',
+    email='oswaldosant@gmail.com', role=c("aut", "cre")),
+    person(given='Fernando', family='Silveira Marques',
+    email='fernandosix@gmail.com', role="aut"))
+Version: 0.0.1
+Date: 2014-03-28

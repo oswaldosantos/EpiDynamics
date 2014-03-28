@@ -1,0 +1,6 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+dev_tools
+.gitignore
+.Rhistory
+LICENSE

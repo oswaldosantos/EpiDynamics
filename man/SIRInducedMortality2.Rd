@@ -1,0 +1,68 @@
+\name{SIRInducedMortality2}
+\alias{SIRInducedMortality2}
+\title{SIR model with disease induced mortality: frequency-dependent transmission (P 2.4).}
+\usage{
+SIRInducedMortality2(pars = NULL, init = NULL, time = NULL, ...)
+}
+\arguments{
+  \item{pars}{\code{\link{vector}} with 5 values: the
+  probability than an infected individual dies from the
+  disease before recovering, the per capita death rate from
+  natural causes, the population level birth rate, the
+  transmission rate, and the recovery rate. The names of
+  these values must be "rho", "mu", "nu", "beta", and
+  "gamma", respectively. All parameters must be positive.}
+
+  \item{init}{\code{\link{vector}} with 3 values: the
+  initial number of susceptibles, infectious and recovered.
+  The names of these values must be "X", "Y" and "Z",
+  respectively.}
+
+  \item{time}{time sequence for which output is wanted; the
+  first value of times must be the initial time.}
+
+  \item{...}{further arguments passed to
+  \link[deSolve]{ode} function.}
+}
+\value{
+\code{\link{list}}. The first element, \code{*$model}, is
+the model function. The second, third and fourth elements
+are the vectors (\code{*$pars}, \code{*$init},
+\code{*$time}, containing the \code{pars}, \code{init} and
+\code{time} arguments of the function. The fifth element
+\code{*$results} is a \code{\link{data.frame}} with up to
+as many rows as elements in time. First column contains the
+time. Second, third and fourth columns contain the number
+of susceptibles, infectious and recovered.
+}
+\description{
+Solves a SIR model with a probability of mortality, and
+unequal births and deaths
+}
+\details{
+This is the R version of program 2.4 from page 36 of
+"Modeling Infectious Disease in humans and animals" by
+Keeling & Rohani.
+}
+\examples{
+# Parameters and initial conditions.
+parameters<- c(rho = 0.5,mu = 1 / (70 * 365.0),nu= 1 / (70 * 365.0),
+                      beta = 520 / 365.0, gamma = 1 / 7)
+initials <- c(X = 0.2, Y = 1e-4, Z = 1 - 0.2 - 1e-4)
+
+# Solve the system.
+sir.induced.mortality2 <- SIRInducedMortality2(pars = parameters,
+                                 init = initials,
+                                 time = 0:1e4)
+}
+\references{
+Keeling, Matt J., and Pejman Rohani. Modeling infectious
+diseases in humans and animals. Princeton University Press,
+2008.
+\href{http://www.modelinginfectiousdiseases.org/}{Modeling
+Infectious Diseases in Humans and Animals}
+}
+\seealso{
+\link[deSolve]{ode}.
+}
+

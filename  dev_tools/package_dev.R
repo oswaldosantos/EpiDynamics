@@ -1,11 +1,9 @@
 library(devtools)
 
 # Development workflow
-setwd('~/Documents/Projectos')
-load_all('EpiDynamics')
-document('EpiDynamics')
-install('EpiDynamics')
-setwd('~/Documents/Projectos/EpiDynamics')
+load_all()
+document()
+install()
 
 # News preview
 show_news()

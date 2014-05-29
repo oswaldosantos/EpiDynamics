@@ -6,13 +6,14 @@ SIRSinusoidalBirth(pars = NULL, init = NULL, time = NULL, ...)
 }
 \arguments{
   \item{pars}{\code{\link{list}} with: the transmission
-  rate, the mean birth rate, a \code{\link{vector}} with
-  the amplitude of sinuoidal forcing for the birth rate,
-  the frequency of the oscillations, the per capita death
-  rate and the recovery rate. The names of these values
-  must be "beta", "alpha0", "alpha1", "w", "mu" and
-  "gamma", respectively. All rates must be specified in
-  days and alpha1 <= 1.}
+  rate, the mean birth rate, a scalar (or a
+  \code{\link{vector}} to create bifurcations) with the
+  amplitude of sinuoidal forcing for the birth rate, the
+  frequency of the oscillations, the per capita death rate
+  and the recovery rate. The names of these values must be
+  "beta", "alpha0", "alpha1", "w", "mu" and "gamma",
+  respectively. All rates must be specified in days and
+  alpha1 <= 1.}
 
   \item{init}{\code{\link{vector}} with 3 values: the
   initial proportion of susceptibles and infectious. The
@@ -44,7 +45,9 @@ rate.
 \details{
 This is the R version of program 5.3 from page 184 of
 "Modeling Infectious Disease in humans and animals" by
-Keeling & Rohani.
+Keeling & Rohani. To create bifurcations, \code{alpha1}
+must be a vector. For bifurcations, if max(time) < 3650),
+time is defined as c(0:3650).
 }
 \examples{
 # Parameters and initial conditions (bifurcation plot of infectious)

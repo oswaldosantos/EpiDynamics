@@ -9,7 +9,7 @@ Further information can be found in the URL given below.
 }
 \details{
 \tabular{ll}{ Package: \tab EpiDynamics\cr Type: \tab
-Package\cr Version: \tab 0.0.1\cr Date: \tab 2014-03-25\cr
+Package\cr Version: \tab 0.0.1\cr Date: \tab 2014-03-28\cr
 Depends: \tab R (>= 3.0.2)\cr Imports: \tab deSolve, FME,
 survey, reshape2, ggplot2, shiny, grid, rgdal, maptools,
 sp\cr License: \tab GPL (>= 2)\cr LazyLoad: \tab yes\cr

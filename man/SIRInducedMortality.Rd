@@ -51,9 +51,10 @@ parameters <- c(rho = 0.5,mu = 1 / (70 * 365.0),nu= 1 / (70 * 365.0),
 initials <- c(X = 0.2, Y = 1e-4, Z = 1 - 0.2 - 1e-4)
 
 # Solve the system.
-sir.induced.mortality <- SIRInducedMortality(pars = parameters,
-                                 init = initials,
-                                 time = 0:1e5)
+# Uncomment the following lines:
+# sir.induced.mortality <- SIRInducedMortality(pars = parameters,
+#                                  init = initials,
+#                                  time = 0:1e5)
 }
 \references{
 Keeling, Matt J., and Pejman Rohani. Modeling infectious

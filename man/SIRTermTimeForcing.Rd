@@ -6,12 +6,13 @@ SIRTermTimeForcing(pars = NULL, init = NULL, term.times = terms,
   cicles = 10, beta1 = NULL, low.term.first = TRUE)
 }
 \arguments{
-  \item{pars}{\code{\link{vector}} with 4 values: the mean
-  transmission rate, the amplitude of sinusoidal forcing,
-  the removal recovery rate, and the per capita death rate.
-  The names for these values must be: "beta0", "beta1",
-  "gamma", and "mu", respectively. All parameters must be
-  positive and beta1 <= 1.}
+  \item{pars}{\code{\link{list}} with 4 values: the mean
+  transmission rate, a scalar (or a \code{\link{vector}} to
+  create bifurcations) with the amplitude of sinusoidal
+  forcing, the removal recovery rate, and the per capita
+  death rate. The names for these values must be: "beta0",
+  "beta1", "gamma", and "mu", respectively. All parameters
+  must be positive and beta1 <= 1.}
 
   \item{init}{\code{\link{vector}} with 3 values: the
   initial proportion of proportion of susceptibles,
@@ -24,11 +25,6 @@ SIRTermTimeForcing(pars = NULL, init = NULL, term.times = terms,
   \item{cicles}{value indicating how many times
   \code{term.times} must be simulated (see details and
   example).}
-
-  \item{beta1}{sequence of values between 0 and 1, to
-  simulate bifurcation dynamics. The element \code{beta1}
-  in \code{pars} must be defined but just the \code{beta1}
-  sequence is considered (see example).}
 
   \item{low.term.first}{logical. If \code{TRUE} (default),
   the first term-time is considered -1, the second 1, the
@@ -68,7 +64,8 @@ of \code{cicles} and each cicle is composed by a
 \examples{
 ## Parameters and initial conditions.
 initials <- c(S = 1/17, I = 1e-4, R = 1 - 1/17 - 1e-4)
-parameters <- c(beta0=17/13, beta1=(0.25), gamma=1/13.0, mu=1/(50*365.0))
+parameters <- c(beta0 = 17 / 13, beta1 = 0.25,
+                gamma = 1 / 13, mu = 1 / (50 * 365))
 
 ## Term-times and cycles
 # In a year-unit cicle, holidays happen for example
@@ -91,10 +88,12 @@ sir.term.time.forcing <- SIRTermTimeForcing(pars = parameters,
 # the number of cicles (e.g. number of days) is less
 # than 3650, bifurcation dynamics are solved for 3650
 # time-steps
+parameters2 <- c(beta0 = 17 / 13,
+                beta1 = seq(0, 0.3, by = 0.001),
+                gamma = 1 / 13, mu = 1 / (50 * 365))
 # Uncomment the following lines:
-# bifur <- SIRTermTimeForcing(pars = parameters, init = initials,
-#                             term.times = terms, cicles = 10),
-#                             beta1 = seq(0, 0.3, by = 0.001))
+# bifur <- SIRTermTimeForcing(pars = parameters2, init = initials,
+#                             term.times = terms, cicles = 10)
 }
 \references{
 Keeling, Matt J., and Pejman Rohani. Modeling infectious

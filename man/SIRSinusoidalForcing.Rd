@@ -2,14 +2,17 @@
 \alias{SIRSinusoidalForcing}
 \title{SIR model with sinusoidal forcing (P 5.1).}
 \usage{
-SIRSinusoidalForcing(pars = NULL, init = NULL, time = NULL, ...)
+SIRSinusoidalForcing(pars = NULL, init = NULL, time = NULL,
+  beta1 = NULL, ...)
 }
 \arguments{
-  \item{pars}{\code{\link{vector}} with 4 values: the death
-  rate, the mean transmission rate, the amplitude of
-  sinusoidal forcing, the frequency of oscillations and the
-  recovery rate. The names for these values must be: "mu",
-  "beta0", "beta1", "omega" and "gamma", respectively.}
+  \item{pars}{\code{\link{list}} with 4 values: the death
+  rate, the mean transmission rate, a scalar (or a
+  \code{\link{vector}} to create bifurcations) with the
+  amplitude of sinusoidal forcing, the frequency of
+  oscillations and the recovery rate. The names for these
+  values must be: "mu", "beta0", "beta1", "omega" and
+  "gamma", respectively.}
 
   \item{init}{\code{\link{vector}} with 3 values: initial
   proportion of proportion of susceptibles, infectious and
@@ -42,12 +45,14 @@ transmission rate.
 This is the R version of program 5.1 from page 160 of
 "Modeling Infectious Disease in humans and animals" by
 Keeling & Rohani.
+
+When beta1 is a vector in \code{pars}, it must be a
+sequence between 0 and 1.
 }
 \examples{
 # Parameters and initial conditions.
-parameters <- c(beta0 = 17 / 13, beta1 = 0.1,
-                gamma = 1 / 13, omega = pi,
-                mu = 1 / (50 * 365))
+parameters <- list(beta0 = 17 / 13, beta1 = 0.1, gamma = 1 / 13,
+                   omega = 2 * pi / 365, mu = 1 / (50 * 365))
 
 initials <- c(S = 1 / 17, I = 1e-4,
               R = 1 - 1 / 17 - 1e-4)
@@ -56,6 +61,15 @@ initials <- c(S = 1 / 17, I = 1e-4,
 sir.sinusoidal.forcing <- SIRSinusoidalForcing(pars = parameters,
                                                init = initials,
                                                time = 0:(60 * 365))
+
+# Solve bifurcation dynamics for 20 years.
+# If max(time) < 3650, bifurcation dynamics are solved for 3650 time-steps.
+parameters2 <- list(beta0 = 17 / 13, beta1 = seq(0.001, 0.251, by = 0.001),
+                   gamma = 1 / 13, omega = 2 * pi / 365, mu = 1 / (50 * 365))
+# Uncomment the following lines:
+# bifur <- SIRSinusoidalForcing(pars = parameters2,
+#                               init = initials,
+#                               time = 0:(20 * 365))
 }
 \references{
 Keeling, Matt J., and Pejman Rohani. Modeling infectious

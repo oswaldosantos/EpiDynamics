@@ -1,4 +1,5 @@
 export(MultiStrainPartialImmunity)
+export(PlotModels)
 export(SEIR)
 export(SEIR4AgeClasses)
 export(SEIRnStages)

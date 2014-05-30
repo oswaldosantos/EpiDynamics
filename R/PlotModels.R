@@ -73,15 +73,23 @@ PlotModels <- function(model.out = NULL, variables = NULL, x.label = NULL, y.lab
         names(tmp)[2] <- 'value'
         print(ggplot(tmp, aes(time, value)) +
                 geom_line(size = line.size, color = i) +
-                ylab(var) + xlab(x.label),
+                ylab(var) + xlab(x.label) +
+                theme(axis.text.x = element_text(size = text.size),
+                      axis.text.y = element_text(size = text.size),
+                      axis.title.x = element_text(size = text.size + 1),
+                      axis.title.y = element_text(size = text.size + 1)),
               vp = vplayout(i, 1))  
       }
     } else {
       model <- melt(model, id = 'time')
-      ggplot(model, aes(time, value, color = variable)) +
+      print(ggplot(model, aes(time, value, color = variable)) +
         geom_line(size = line.size) +
         scale_colour_discrete(name = legend.title) +
-        xlab(x.label) + ylab(y.label) 
+        xlab(x.label) + ylab(y.label) +
+        theme(axis.text.x = element_text(size = text.size),
+              axis.text.y = element_text(size = text.size),
+              axis.title.x = element_text(size = text.size + 1),
+              axis.title.y = element_text(size = text.size + 1)))
     }
   }
   if (bifur) {
@@ -100,10 +108,10 @@ PlotModels <- function(model.out = NULL, variables = NULL, x.label = NULL, y.lab
     ggplot(plt, aes(x, y)) +
       geom_point(size = line.size + 2) +
       xlab(x.label) + ylab(y.label) +
-    theme(axis.text.x = element_text(size = text.size),
-          axis.text.y = element_text(size = text.size),
-          axis.title.x = element_text(size = text.size + 1),
-          axis.title.y = element_text(size = text.size + 1))
+      theme(axis.text.x = element_text(size = text.size),
+            axis.text.y = element_text(size = text.size),
+            axis.title.x = element_text(size = text.size + 1),
+            axis.title.y = element_text(size = text.size + 1))
     
   }
 }

@@ -1,6 +1,6 @@
 #' SIR model with 2 age classes (P 3.3).
 #' @description Solves a SIR model two different age-groups.
-#' @param pars \code{\link{vector}} with 8 values: 4 transmission rates, 1 recovery rate, rate at which children mature, death rate in the childhood group and death rate in the adult group. The names of these values must be "betaCC","betaCA","betaAC", "betaAA", "gamma", "lC","muC" and "muA", respectively. The letters after the word "beta" denote transmission to any group from any group, e.g., "betaCA" represent transmission to children group from adult group. All parameters must be positive. Parameters "nC" na "nu" (proportion of the population that are in the childhood group and birth rate into the childhood class, respectively) are not defined explicitly but calculated as:  nC = muA/(lC+muA) and nu = (lC+nuA)nC. All rates are specified in years and all parameters must be positive
+#' @param pars \code{\link{vector}} with 8 values: 4 transmission rates, 1 recovery rate, rate at which children mature, death rate in the childhood group and death rate in the adult group. The names of these values must be "betaCC","betaCA","betaAC", "betaAA", "gamma", "lC","muC" and "muA", respectively. The letters after the word "beta" denote transmission to any group from any group, e.g., "betaCA" represent transmission to children group from adult group. All parameters must be positive. Parameters "nC" na "nu" (proportion of the population that are in the childhood group and birth rate into the childhood class, respectively) are not defined explicitly, but calculated as:  nC = muA/(lC+muA) and nu = (lC+nuA)nC. All rates are specified in years and all parameters must be positive
 #' @param init \code{\link{vector}} with 4 values: the initial proportion of the population that are both susceptible and in the childhood group, the initial proportion of the population that are both infectious and in the childhood group, the initial proportion of the population that are both susceptible and in the adult group, and the initial proportion of the population that are both infectious and in the adult group. The names of these values must be "SC", "IC", "SA" and "IA", respectively. Requirements: SC + IC <= nC, and SA + IA <= nA = 1 - nC.
 #' @param time time sequence for which output is wanted; the first value of times must be the initial time.
 #' @param ... further arguments passed to \link[deSolve]{ode} function.
@@ -17,10 +17,10 @@
 #' initials <- c(SC = 0.1, IC = 0.0001, SA = 0.1, IA = 0.0001)
 #' 
 #' # Solve the system.
-#' sir2stages <- SIR2Stages(pars = parameters, 
+#' sir2AgeClasses <- sir2AgeClasses(pars = parameters, 
 #'                           init = initials, time = seq(0, 100, 0.01))
 #' 
-SIR2Stages <- function(pars = NULL, init = NULL, time = NULL, ...) {
+sir2AgeClasses <- function(pars = NULL, init = NULL, time = NULL, ...) {
   if (is.null(pars)) {
     stop("undefined 'pars'")
   }

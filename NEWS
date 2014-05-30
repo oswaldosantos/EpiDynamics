@@ -1,4 +1,23 @@
+EpiDynamics 0.0.3
+=================
+
+* SIR2AgeClasses: Previuosly named SIR2Stages.
+
+* PlotModels: Bug fix for grid argument.
+
+
+EpiDynamics 0.0.2
+=================
+
+* PlotModels: It plots model's results.
+
+* SIRSinusoidalForcing: Now it solves bifurcation.
+
+* SIRSinusoidalBitrh: Bug fix to solve bifurcations.
+
+
 EpiDynamics 0.0.1
 =================
 
 * Dynamic Models in Epidemiology
+

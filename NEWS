@@ -1,3 +1,13 @@
+EpiDynamics 0.1.1
+=================
+
+* DESCRIPTION: imports update.
+
+* PlotModels: renamed as PlotMods to avoid conflicts with PlotModels function
+              from the capm package. In addition, bug fixed to use correctly
+              the 'variables' argument in the intended way.
+
+
 EpiDynamics 0.1
 =================
 

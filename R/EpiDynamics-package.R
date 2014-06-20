@@ -3,10 +3,10 @@
 #' \tabular{ll}{
 #' Package: \tab EpiDynamics\cr
 #' Type: \tab Package\cr
-#' Version: \tab 0.1\cr
-#' Date: \tab 2014-05-30\cr
+#' Version: \tab 0.1.1\cr
+#' Date: \tab 2014-06-20\cr
 #' Depends: \tab R (>= 3.0.2)\cr
-#' Imports: \tab deSolve, FME, reshape2, ggplot2, grid\cr
+#' Imports: \tab deSolve, reshape2, ggplot2, grid\cr
 #' License: \tab GPL (>= 2)\cr
 #' LazyLoad: \tab yes\cr
 #' URL: \tab \url{http://oswaldosantos.github.io/EpiDynamics}\cr
@@ -19,5 +19,5 @@
 #' @docType package
 #' @title The EpiDynamics Package
 #' @keywords package
-#' @import deSolve FME reshape2 ggplot2 grid
+#' @import deSolve reshape2 ggplot2 grid
 NULL

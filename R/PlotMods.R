@@ -22,7 +22,7 @@
 #' sir.sinusoidal.forcing <- SIRSinusoidalForcing(pars = parameters, 
 #'                                                init = initials, 
 #'                                                time = 0:(60 * 365))
-#' PlotModels(sir.sinusoidal.forcing)                                          
+#' PlotMods(sir.sinusoidal.forcing)                                          
 #'                                                
 #' # Solve bifurcation dynamics for 20 years.
 #' # If max(time) < 3650, bifurcation dynamics are solved for 3650 time-steps.
@@ -32,9 +32,10 @@
 #' # bifur <- SIRSinusoidalForcing(pars = parameters2, 
 #' #                               init = initials,
 #' #                               time = 0:(20 * 365))
-#' # PlotModels(bifur, bifur = T)
+#' # PlotMods(bifur, bifur = T)
 #' 
-PlotModels <- function(model.out = NULL, variables = NULL, x.label = NULL, y.label = NULL, legend.title = 'variable', line.size = 1, text.size = 14,  grid = T, bifur = F) {
+PlotMods <- function(model.out = NULL, variables = NULL, x.label = NULL, y.label = NULL, legend.title = 'variable', line.size = 1, text.size = 14,  grid = T, bifur = F) {
+  value <- variable <- x <- y <- NULL
   if (bifur == FALSE) {
     if (is.null(variables)) {
       if (is.data.frame(model.out)) {
@@ -50,9 +51,9 @@ PlotModels <- function(model.out = NULL, variables = NULL, x.label = NULL, y.lab
         variables = c(1, variables)
       }
       if (is.data.frame(model.out)) {
-        model <- model.out[ , variables]
+        model <- model.out
       } else {
-        model <- model.out$results[ , variables]
+        model <- model.out$results
       }
     }
     if (is.null(x.label)) {
@@ -73,23 +74,15 @@ PlotModels <- function(model.out = NULL, variables = NULL, x.label = NULL, y.lab
         names(tmp)[2] <- 'value'
         print(ggplot(tmp, aes(time, value)) +
                 geom_line(size = line.size, color = i) +
-                ylab(var) + xlab(x.label) +
-                theme(axis.text.x = element_text(size = text.size),
-                      axis.text.y = element_text(size = text.size),
-                      axis.title.x = element_text(size = text.size + 1),
-                      axis.title.y = element_text(size = text.size + 1)),
+                ylab(var) + xlab(x.label),
               vp = vplayout(i, 1))  
       }
     } else {
-      model <- melt(model, id = 'time')
+      model <- melt(model[ , variables], id = 'time')
       print(ggplot(model, aes(time, value, color = variable)) +
         geom_line(size = line.size) +
         scale_colour_discrete(name = legend.title) +
-        xlab(x.label) + ylab(y.label) +
-        theme(axis.text.x = element_text(size = text.size),
-              axis.text.y = element_text(size = text.size),
-              axis.title.x = element_text(size = text.size + 1),
-              axis.title.y = element_text(size = text.size + 1)))
+        xlab(x.label) + ylab(y.label))
     }
   }
   if (bifur) {
@@ -108,10 +101,10 @@ PlotModels <- function(model.out = NULL, variables = NULL, x.label = NULL, y.lab
     ggplot(plt, aes(x, y)) +
       geom_point(size = line.size + 2) +
       xlab(x.label) + ylab(y.label) +
-      theme(axis.text.x = element_text(size = text.size),
-            axis.text.y = element_text(size = text.size),
-            axis.title.x = element_text(size = text.size + 1),
-            axis.title.y = element_text(size = text.size + 1))
+    theme(axis.text.x = element_text(size = text.size),
+          axis.text.y = element_text(size = text.size),
+          axis.title.x = element_text(size = text.size + 1),
+          axis.title.y = element_text(size = text.size + 1))
     
   }
 }

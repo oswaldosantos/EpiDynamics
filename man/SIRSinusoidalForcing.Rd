@@ -3,8 +3,7 @@
 \alias{SIRSinusoidalForcing}
 \title{SIR model with sinusoidal forcing (P 5.1).}
 \usage{
-SIRSinusoidalForcing(pars = NULL, init = NULL, time = NULL,
-  beta1 = NULL, ...)
+SIRSinusoidalForcing(pars = NULL, init = NULL, time = NULL, ...)
 }
 \arguments{
 \item{pars}{\code{\link{list}} with 4 values: the death rate, the mean transmission rate, a scalar (or a \code{\link{vector}} to create bifurcations) with the amplitude of sinusoidal forcing, the frequency of oscillations and the recovery rate. The names for these values must be: "mu", "beta0", "beta1", "omega" and "gamma", respectively.}

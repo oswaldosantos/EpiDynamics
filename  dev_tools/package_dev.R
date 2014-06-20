@@ -12,13 +12,13 @@ show_news()
 check()
 check_doc()
 run_examples()
-# build_win()
+build_win()
 
 # Update version in:
 #   DESCRIPTION
 #   EpiDynamics-package
 #   NEWS
 
-############################
-## release('EpiDynamics') ##
-############################
+###############
+## release() ##
+###############

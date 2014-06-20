@@ -34,7 +34,7 @@
 #' #                               init = initials,
 #' #                               time = 0:(20 * 365))
 #' 
-SIRSinusoidalForcing <- function(pars = NULL, init = NULL, time = NULL, beta1 = NULL, ...) {
+SIRSinusoidalForcing <- function(pars = NULL, init = NULL, time = NULL, ...) {
   if (is.null(pars)) {
     stop("undefined 'pars'")
   }

@@ -4,7 +4,7 @@
 \title{SIR model with corrected term-time forcing (P 5.2).}
 \usage{
 SIRTermTimeForcing(pars = NULL, init = NULL, term.times = terms,
-  cicles = 10, beta1 = NULL, low.term.first = TRUE)
+  cicles = 10, low.term.first = TRUE)
 }
 \arguments{
 \item{pars}{\code{\link{list}} with 4 values: the mean transmission rate, a scalar (or a \code{\link{vector}} to create bifurcations) with the amplitude of sinusoidal forcing, the removal recovery rate, and the per capita death rate. The names for these values must be: "beta0", "beta1", "gamma", and "mu", respectively. All parameters must be positive and beta1 <= 1.}
@@ -33,7 +33,7 @@ This model is based on the behaviour os measles and other child-hood diseases. T
 \examples{
 ## Parameters and initial conditions.
 initials <- c(S = 1/17, I = 1e-4, R = 1 - 1/17 - 1e-4)
-parameters <- c(beta0 = 17 / 13, beta1 = 0.25,
+parameters <- list(beta0 = 17 / 13, beta1 = 0.25,
                 gamma = 1 / 13, mu = 1 / (50 * 365))
 
 ## Term-times and cycles
@@ -57,7 +57,7 @@ sir.term.time.forcing <- SIRTermTimeForcing(pars = parameters,
 # the number of cicles (e.g. number of days) is less
 # than 3650, bifurcation dynamics are solved for 3650
 # time-steps
-parameters2 <- c(beta0 = 17 / 13,
+parameters2 <- list(beta0 = 17 / 13,
                 beta1 = seq(0, 0.3, by = 0.001),
                 gamma = 1 / 13, mu = 1 / (50 * 365))
 # Uncomment the following lines:

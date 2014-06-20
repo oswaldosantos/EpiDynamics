@@ -17,7 +17,7 @@
 #' @examples 
 #' ## Parameters and initial conditions.
 #' initials <- c(S = 1/17, I = 1e-4, R = 1 - 1/17 - 1e-4)
-#' parameters <- c(beta0 = 17 / 13, beta1 = 0.25,
+#' parameters <- list(beta0 = 17 / 13, beta1 = 0.25,
 #'                 gamma = 1 / 13, mu = 1 / (50 * 365))
 #' 
 #' ## Term-times and cycles
@@ -41,7 +41,7 @@
 #' # the number of cicles (e.g. number of days) is less
 #' # than 3650, bifurcation dynamics are solved for 3650
 #' # time-steps
-#' parameters2 <- c(beta0 = 17 / 13,
+#' parameters2 <- list(beta0 = 17 / 13,
 #'                 beta1 = seq(0, 0.3, by = 0.001),
 #'                 gamma = 1 / 13, mu = 1 / (50 * 365))
 #' # Uncomment the following lines:
@@ -49,7 +49,7 @@
 #' #                             term.times = terms, cicles = 10)
 
 
-SIRTermTimeForcing <- function(pars = NULL, init = NULL, term.times = terms, cicles = 10, beta1 = NULL, low.term.first = TRUE) {
+SIRTermTimeForcing <- function(pars = NULL, init = NULL, term.times = terms, cicles = 10, low.term.first = TRUE) {
   
   end.time <- term.times[length(term.times)]
   cicles <- cicles - 1

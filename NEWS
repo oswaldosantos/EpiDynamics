@@ -1,3 +1,17 @@
+EpiDynamics 0.1.2
+=================
+
+* DESCRIPTION: imports update.
+
+* SIRScaledAdditiveNoise: Solves a SIR model with scaled additive noise.
+
+* SIRDemoStochastic: Solves a SIR model with demographic stochasticity.
+
+* SIR2TypesImports: Solves a model with two types of stochastic imports.
+
+* SIR2Stages: it is now called SIR2AgeClasses. 
+
+
 EpiDynamics 0.1.1
 =================
 

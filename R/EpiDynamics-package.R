@@ -3,8 +3,8 @@
 #' \tabular{ll}{
 #' Package: \tab EpiDynamics\cr
 #' Type: \tab Package\cr
-#' Version: \tab 0.1.1\cr
-#' Date: \tab 2014-06-20\cr
+#' Version: \tab 0.1.2\cr
+#' Date: \tab 2014-08-13\cr
 #' Depends: \tab R (>= 3.0.2)\cr
 #' Imports: \tab deSolve, reshape2, ggplot2, grid\cr
 #' License: \tab GPL (>= 2)\cr

@@ -17,10 +17,10 @@
 #' initials <- c(SC = 0.1, IC = 0.0001, SA = 0.1, IA = 0.0001)
 #' 
 #' # Solve the system.
-#' sir2AgeClasses <- sir2AgeClasses(pars = parameters, 
+#' sir.2.age.classes <- SIR2AgeClasses(pars = parameters, 
 #'                           init = initials, time = seq(0, 100, 0.01))
 #' 
-sir2AgeClasses <- function(pars = NULL, init = NULL, time = NULL, ...) {
+SIR2AgeClasses <- function(pars = NULL, init = NULL, time = NULL, ...) {
   if (is.null(pars)) {
     stop("undefined 'pars'")
   }

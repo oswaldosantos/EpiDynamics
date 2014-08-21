@@ -1,6 +1,6 @@
 #' SIR model with demographic stochasticity (P 6.4).
 #' @description Solves a SIR model with demographic stochasticity
-#' @param pars \code{\link{vector}} with 3 parameters: transmission rate, recovery rate and per capita death rate. The names of these values must be "beta", "gamma" and "mu", respectively. All parameters must be positive and all rates are specified in days. The birth rate is assumed to be constant and equal to μN, therefore preventing extinction of the host population.
+#' @param pars \code{\link{vector}} with 3 parameters: transmission rate, recovery rate and per capita death rate. The names of these values must be "beta", "gamma" and "mu", respectively. All parameters must be positive and all rates are specified in days. The birth rate is assumed to be constant and equal to mu * N, therefore preventing extinction of the host population.
 #' @param init \code{\link{vector}} with 3 values: the initial population size that are susceptible, infectious and the total population size. The names of these values must be "X", "Y" and "N", respectively. All initial conditions must be positive.
 #' @param time time sequence for which output is wanted; the first value of times must be the initial time.
 #' @param ... further arguments passed to \link[deSolve]{ode} function.
@@ -15,11 +15,12 @@
 #' parameters <- c(beta = 1, gamma = 1 / 10, mu = 5e-4)
 #' initials <- c(X = 500, Y = 25, N = 5e3)
 #' 
-#' # Solve the system.
-#' sir.demographic.stochasticity <- SIRDemoStochastic(pars = parameters, 
-#'                           init = initials, time = 2 * 365)
+#' # Solve and plot.
+#' sir.demog.stoch <- SIRDemogStoch(pars = parameters, 
+#'                                  init = initials, time = 2 * 365)
+#' PlotMods(sir.demog.stoch)
 #' 
-SIRDemoStochastic <- function(pars = NULL, init = NULL, time = NULL, ...) {
+SIRDemogStoch <- function(pars = NULL, init = NULL, time = NULL, ...) {
   if (is.null(pars)) {
     stop("undefined 'pars'")
   }

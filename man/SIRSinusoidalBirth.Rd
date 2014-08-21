@@ -35,16 +35,18 @@ parameters2 <- list(beta = 17 / 13, alpha0 = 1 / (50 * 365),
 
 initials <- c(S = 1 / 17, I = 1e-4, R =  1 - (1 / 17 + 1e-4))
 
-# Solve the system.
+# Solve and plot.
 sir.sinusoidal.birth <- SIRSinusoidalBirth(pars = parameters,
                                            init = initials,
                                            time = 0:(20 * 365))
+PlotMods(sir.sinusoidal.birth)
 
 # Bifurcations
-# Uncomment the following lines:
+# Uncomment the following lines (running it takes more than a few seconds):
 # bifurcation <- SIRSinusoidalBirth(pars = parameters2,
 #                                   init = initials,
 #                                   time = 0:(20 * 365))
+# PlotMods(bifur, bifur = TRUE)
 }
 \references{
 Keeling, Matt J., and Pejman Rohani. Modeling infectious diseases in humans and animals. Princeton University Press, 2008.

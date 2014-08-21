@@ -1,6 +1,6 @@
 #' SIR model with Scaled additive noise (P 6.2).
 #' @description Solves a SIR model with scaled additive noise.
-#' @param pars \code{\link{vector}} with 5 parameters: transmission rate, recovery rate, per capita death rate, the total population size and the number of steps that will change noise term. The names of these values must be "beta", "gamma", "mu", "N" and "step", respectively. All parameters must be positive and all rates are specified in days. The birth rate is assumed to be constant and equal to μN, therefore preventing extinction of the host population. Noise terms are generated as a function of the time step and its magnitude is a function of the rate of each process.
+#' @param pars \code{\link{vector}} with 5 parameters: transmission rate, recovery rate, per capita death rate, the total population size and the number of steps that will change noise term. The names of these values must be "beta", "gamma", "mu", "N" and "step", respectively. All parameters must be positive and all rates are specified in days. The birth rate is assumed to be constant and equal to mu * N, therefore preventing extinction of the host population. Noise terms are generated as a function of the time step and its magnitude is a function of the rate of each process.
 #' @param init \code{\link{vector}} with 2 values: the initial population size that are susceptible and infectious. The names of these values must be "X" and "Y", respectively. All initial conditions must be positive.
 #' @param time time sequence for which output is wanted; the first value of times must be the initial time.
 #' @param ... further arguments passed to \link[deSolve]{ode} function.
@@ -12,12 +12,15 @@
 #' @export
 #' @examples 
 #' # Parameters and initial conditions.
-#' parameters <- c(beta = 1, gamma = 1 / 10, mu = 1 / (50 * 365), N = 1e6, step = 1)
+#' parameters <- c(beta = 1, gamma = 1 / 10, mu = 1 / (50 * 365),
+#'                 N = 1e6, step = 1)
 #' initials <- c(X = 1e5, Y = 500)
 #' 
-#' # Solve the system.
-#' sir.scaled.additive.noise <- SIRScaledAdditiveNoise(pars = parameters, 
-#'                           init = initials, time = 5 * 365)
+#' # Solve and plot.
+#' sir.scaled.additive.noise <- 
+#' SIRScaledAdditiveNoise(pars = parameters, 
+#'                        init = initials, time = 5 * 365)
+#' PlotMods(sir.scaled.additive.noise)
 #' 
 SIRScaledAdditiveNoise <- function(pars = NULL, init = NULL, time = NULL, ...) {
   if (is.null(pars)) {
@@ -29,6 +32,8 @@ SIRScaledAdditiveNoise <- function(pars = NULL, init = NULL, time = NULL, ...) {
   if (is.null(pars)) {
     stop("undefined 'time'")
   }
+  init2 <- NULL
+  init2 <- init
   function1 <- function(pars = NULL, init = NULL, time = NULL) {
     function2 <- function(time, init, pars) {
       with(as.list(c(init, pars)), {
@@ -37,10 +42,10 @@ SIRScaledAdditiveNoise <- function(pars = NULL, init = NULL, time = NULL, ...) {
           (beta * X * Y / N + sqrt(beta * X * Y / N) * xi2) - 
           (mu * X + sqrt(mu * X) * xi3);
         
-# python equations same as matlab
-#         dX = (mu * N + sqrt(mu * N) * xi1) -
-#           (beta * X * Y / N + sqrt(beta * X * Y /N) * xi2)  -
-#           (mu * V[1] + np.sqrt(mu*V[1]) * xi3); # problema detectado aqui
+        # python equations same as matlab
+        #         dX = (mu * N + sqrt(mu * N) * xi1) -
+        #           (beta * X * Y / N + sqrt(beta * X * Y /N) * xi2)  -
+        #           (mu * V[1] + np.sqrt(mu*V[1]) * xi3); # problema detectado aqui
         
         dY = (beta * X * Y / N + sqrt(beta * X * Y / N) * xi2) -
           (gamma * Y + sqrt(gamma * Y) * xi4) - (mu * Y + sqrt(mu * Y) * xi5)
@@ -74,7 +79,7 @@ SIRScaledAdditiveNoise <- function(pars = NULL, init = NULL, time = NULL, ...) {
   
   return(list(model = function1,
               pars = pars,
-              init = init,
+              init = init2,
               time = time,
               results = as.data.frame(unique(output))))
 }

@@ -46,11 +46,12 @@ parameters <- list(beta0 = 17 / 13, beta1 = 0.25,
 terms <- c(1, 6, 100, 115, 200, 251, 300, 307, 356, 365)
 cicles <- 10
 
-# Solve the system.
+# Solve and plot.
 sir.term.time.forcing <- SIRTermTimeForcing(pars = parameters,
                                             init = initials,
                                             term.times = terms,
                                             cicles = 10)
+PlotMods(sir.term.time.forcing)
 
 # Solve bifurcation dynamics for 20 years.
 # If the number of time-units per cicle (e.g. days) times
@@ -60,9 +61,10 @@ sir.term.time.forcing <- SIRTermTimeForcing(pars = parameters,
 parameters2 <- list(beta0 = 17 / 13,
                 beta1 = seq(0, 0.3, by = 0.001),
                 gamma = 1 / 13, mu = 1 / (50 * 365))
-# Uncomment the following lines:
+# Uncomment the following lines (running it takes more than a few seconds):
 # bifur <- SIRTermTimeForcing(pars = parameters2, init = initials,
 #                             term.times = terms, cicles = 10)
+# PlotMods(bifur, bifur = TRUE)
 }
 \references{
 Keeling, Matt J., and Pejman Rohani. Modeling infectious diseases in humans and animals. Princeton University Press, 2008.

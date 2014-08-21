@@ -17,12 +17,13 @@
 #' 
 #' initials <- c(S = c(0.08, 0.1, 0.1, 0.11),
 #'                        P = c(0.4, 0.3, 0.3, 0.29),
-#'                        L1 = c(0.15, 0.02, 0.1, 0.01))
+#'                        L = c(0.15, 0.02, 0.1, 0.01))
 #' 
-# Solve the system.
+#' # Solve and plot.
 #' mlti.strain.pi <- MultiStrainPartialImmunity(pars = parameters, 
 #'                                              init = initials, 
 #'                                              time = 0:200)
+#' PlotMods(mlti.strain.pi, variables = c('L1', 'L2', 'L3', 'L4'), grid = FALSE)
 #'                                  
 MultiStrainPartialImmunity <- function(pars = NULL, init = NULL, time = NULL, ...) {
   if (is.null(pars)) {
@@ -59,8 +60,7 @@ MultiStrainPartialImmunity <- function(pars = NULL, init = NULL, time = NULL, ..
     for (i in 1:length(init)) {
       tmp[i] <- init[i]
     }
-    init <- tmp
-    
+    init <- tmp    
     output <- ode(times = time, 
                   func = function2, 
                   y = init, parms = pars, ...)
@@ -68,6 +68,7 @@ MultiStrainPartialImmunity <- function(pars = NULL, init = NULL, time = NULL, ..
   }
   
   output <- function1(pars = pars, init = init, time = time)
+  colnames(output)[-1] <- names(init)
   return(list(model = function1,
               pars = pars,
               init = init,

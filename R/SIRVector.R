@@ -19,10 +19,11 @@
 #' 
 #' initials <- c(XH = 1e3, XM = 1e4, YH = 1, YM = 1)
 #' 
-#' # Solve the system.
+#' # Solve and plot.
 #' sir.vector <- SIRVector(pars = parameters,
 #'                         init = initials,
 #'                         time = 0:1000)                                 
+#' PlotMods(sir.vector)
 #' 
 SIRVector <- function(pars = NULL, init = NULL, time = NULL, ...) {
   if (is.null(pars)) {

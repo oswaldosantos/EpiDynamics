@@ -18,11 +18,14 @@
 #'
 #' initials <- c(S = 0.05, I = 0.00001 * rep(1, n) / n)
 #' 
-#' # Solve the system.
-#' # Uncomment the following lines:
-#' #seir.n.stages <- SEIRnStages(pars = parameters, 
+#' # Solve and plot.
+#' # Uncomment the following lines (running it takes more than a few seconds):
+#' # seir.n.stages <- SEIRnStages(pars = parameters, 
 #' #                              init = initials, 
-#' #                              time = seq(1, 30*365, 1))
+#' #                              time = seq(1, 30 * 365, 1))
+#' # PlotMods(seir.n.stages, variables = 2)
+#' # PlotMods(seir.n.stages, variables = 3:13, grid = F)
+
 
 SEIRnStages <- function(pars = NULL, init = NULL, time = NULL, ...) {
   if (is.null(pars)) {
@@ -70,8 +73,8 @@ SEIRnStages <- function(pars = NULL, init = NULL, time = NULL, ...) {
   
   output <- function1(pars = pars, init = init, time = time)  
   return(list(model = function1,
-             pars = pars,
-             init = init,
-             time = time,
-             results = output))
+              pars = pars,
+              init = init,
+              time = time,
+              results = as.data.frame(output)))
 }

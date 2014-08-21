@@ -8,7 +8,7 @@ SIS2RiskGroups(pars = NULL, init = NULL, time = NULL, ...)
 \arguments{
 \item{pars}{\code{\link{vector}} with 6 values: 4 transmission rates, 1 recovery rate and  the proportion of the population that are in the high-risk group. The names of these values must be "betaHH","betaHL","betaLL", "betaLH", "gamma" and "nH", respectively. The letters after the word "beta" denote transmission to any group from any group, e.g., "betaHL" represent transmission to high-risk group from low-risk group. All parameters must be positive.}
 
-\item{init}{\code{\link{vector}} with 2 values: the initial proportion of infectious in the high-risk group and the intial proportion of infectious in the low-risk group. The names of these values must be "IH" and "IL", respectively. All parameters must be positive and  nH <= 1, IH(0) <= nH, IL(0) <= 1-nH.}
+\item{init}{\code{\link{vector}} with 2 values: the initial proportion of infectious in the high-risk group and the intial proportion of infectious in the low-risk group. The names of these values must be "IH" and "IL", respectively.}
 
 \item{time}{time sequence for which output is wanted; the first value of times must be the initial time.}
 
@@ -22,6 +22,8 @@ Solves a SIS model with high-risk (H) and low-risk (L).
 }
 \details{
 This is the R version of program 3.1 from page 58 of "Modeling Infectious Disease in humans and animals" by Keeling & Rohani.
+
+All parameters must be positive and  nH <= 1, IH(0) <= nH, IL(0) <= 1-nH.
 }
 \examples{
 # Parameters and initial conditions.
@@ -29,9 +31,10 @@ parameters <- c(betaHH = 10.0, betaHL = 0.1, betaLH = 0.1,
                 betaLL = 1.0, gamma = 1, nH = 0.2)
 initials <- c(IH = 0.00001, IL = 0.001)
 
-# Solve the system.
-sis2risk.hroups<- SIS2RiskGroups(pars = parameters,
+# Solve and plot.
+sis2risk.groups<- SIS2RiskGroups(pars = parameters,
                                  init = initials, time = 0:15)
+PlotMods(sis2risk.groups, variables = c('IL', 'IH'), grid = FALSE)
 }
 \references{
 Keeling, Matt J., and Pejman Rohani. Modeling infectious diseases in humans and animals. Princeton University Press, 2008.

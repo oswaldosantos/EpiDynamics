@@ -1,6 +1,6 @@
 #' SIR model with two types of imports (P 6.6).
 #' @description Solves a model with two types of stochastic imports and demographic stochasticit
-#' @param pars \code{\link{vector}} with 5 parameters: transmission rate, recovery rate and per capita death rate. The names of these values must be "beta", "gamma", "mu", "epsilon" and "delta"  respectively. All parameters must be positive. The birth rate is assumed to be constant and equal to μN, therefore preventing extinction of the host population.
+#' @param pars \code{\link{vector}} with 5 parameters: transmission rate, recovery rate and per capita death rate. The names of these values must be "beta", "gamma", "mu", "epsilon" and "delta"  respectively. All parameters must be positive. The birth rate is assumed to be constant and equal to mu * N, therefore preventing extinction of the host population.
 #' @param init \code{\link{vector}} with 3 values: the initial population size that are susceptible, infectious and the total population size. The names of these values must be "X", "Y" and "N", respectively. All initial conditions must be positive and all refer to integer numbers.
 #' @param time time sequence for which output is wanted; the first value of times must be the initial time.
 #' @param ... further arguments passed to \link[deSolve]{ode} function.
@@ -12,12 +12,13 @@
 #' @export
 #' @examples 
 #' # Parameters and initial conditions.
-#' parameters <- c(beta = 1, gamma = 0.1, mu = 5e-4, epsilon = 2e-5, delta = 0.01)
-#' initials <- c(X = 500, Y = 25, N = 5e3)
+#' parameters <- c(beta = 1, gamma = 0.1, mu = 5e-4,
+#'                 epsilon = 2e-5, delta = 0.01)
+#' initials <- c(X = 5, Y = 2, N = 50)
 #' 
-#' # Solve the system.
-#' sir.2types.imports <- SIR2TypesImports(pars = parameters, 
-#'                           init = initials, time = 2 * 365)
+#' # Solve and plot.
+#' sir.2types.imports <- SIR2TypesImports(parameters, initials, 2 * 365)
+#' PlotMods(sir.2types.imports)
 #' 
 SIR2TypesImports <- function(pars = NULL, init = NULL, time = NULL, ...) {
   if (is.null(pars)) {
@@ -78,5 +79,5 @@ SIR2TypesImports <- function(pars = NULL, init = NULL, time = NULL, ...) {
   return(list(pars = pars,
               init = init,
               time = time,
-              results = res))
+              results = res[ , 1:4]))
 }

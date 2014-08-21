@@ -25,15 +25,16 @@ This is the R version of program 2.3 from page 35 of "Modeling Infectious Diseas
 }
 \examples{
 # Parameters and initial conditions.
-parameters <- c(rho = 0.5,mu = 1 / (70 * 365.0),nu= 1 / (70 * 365.0),
+parameters <- c(rho = 0.5, mu = 1 / (70 * 365), nu = 1 / (70 * 365),
                       beta = 520 / 365.0, gamma = 1 / 7)
-initials <- c(X = 0.2, Y = 1e-4, Z = 1 - 0.2 - 1e-4)
+initials <- c(X = 0.2, Y = 1e-4, Z = 0)
 
-# Solve the system.
-# Uncomment the following lines:
+# Solve and plot.
+# Uncomment the following lines (running it takes more than a few seconds):
 # sir.induced.mortality <- SIRInducedMortality(pars = parameters,
 #                                  init = initials,
 #                                  time = 0:1e5)
+# PlotMods(sir.induced.mortality)
 }
 \references{
 Keeling, Matt J., and Pejman Rohani. Modeling infectious diseases in humans and animals. Princeton University Press, 2008.

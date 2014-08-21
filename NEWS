@@ -1,3 +1,17 @@
+EpiDynamics 0.2
+===============
+
+* SIRAdditiveNoise:
+
+* SIRDemogStoch: updated name for SIRDemoStochastic function.
+
+* SIRTauLeap:
+
+* SISDemogStoch:
+
+* Plots of results added to the exmaples section in functions' documentation.
+
+
 EpiDynamics 0.1.2
 =================
 

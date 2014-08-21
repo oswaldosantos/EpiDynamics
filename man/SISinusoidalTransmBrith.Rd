@@ -30,10 +30,11 @@ parameters <- list(beta0 = 0.936, beta1 = 0.1, alpha0 = 0.02, alpha1 = 0.1,
                    K = 10000)
 initials <- c(X = 0.5, Y = 0.01, N = 0.6)
 
-# Solve the system.
+# Solve and plot.
 sis.rhdm <- SISinusoidalTransmBrith(pars = parameters,
                                     init = initials,
                                     time = 0:(60 * 365))
+PlotMods(sis.rhdm)
 }
 \references{
 Keeling, Matt J., and Pejman Rohani. Modeling infectious diseases in humans and animals. Princeton University Press, 2008.

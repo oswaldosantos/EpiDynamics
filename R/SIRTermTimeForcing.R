@@ -30,11 +30,12 @@
 #' terms <- c(1, 6, 100, 115, 200, 251, 300, 307, 356, 365)
 #' cicles <- 10
 #' 
-#' # Solve the system.
+#' # Solve and plot.
 #' sir.term.time.forcing <- SIRTermTimeForcing(pars = parameters,
 #'                                             init = initials,
 #'                                             term.times = terms,
 #'                                             cicles = 10)
+#' PlotMods(sir.term.time.forcing)
 #'
 #' # Solve bifurcation dynamics for 20 years.
 #' # If the number of time-units per cicle (e.g. days) times
@@ -44,9 +45,10 @@
 #' parameters2 <- list(beta0 = 17 / 13,
 #'                 beta1 = seq(0, 0.3, by = 0.001),
 #'                 gamma = 1 / 13, mu = 1 / (50 * 365))
-#' # Uncomment the following lines:
+#' # Uncomment the following lines (running it takes more than a few seconds):
 #' # bifur <- SIRTermTimeForcing(pars = parameters2, init = initials,
 #' #                             term.times = terms, cicles = 10)
+#' # PlotMods(bifur, bifur = TRUE)
 
 
 SIRTermTimeForcing <- function(pars = NULL, init = NULL, term.times = terms, cicles = 10, low.term.first = TRUE) {
@@ -133,8 +135,7 @@ SIRTermTimeForcing <- function(pars = NULL, init = NULL, term.times = terms, cic
   }
   
   if (length(pars$beta1) == 1) {
-    output <- solution()
-    return(output)
+    return(as.data.frame(solution()))
   } else {
     end <- end.time * (cicles + 1)
     beta2 <- pars$beta1

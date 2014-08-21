@@ -23,16 +23,18 @@
 #' 
 #' initials <- c(S = 1 / 17, I = 1e-4, R =  1 - (1 / 17 + 1e-4))
 #' 
-#' # Solve the system.
+#' # Solve and plot.
 #' sir.sinusoidal.birth <- SIRSinusoidalBirth(pars = parameters,
 #'                                            init = initials, 
 #'                                            time = 0:(20 * 365))
+#' PlotMods(sir.sinusoidal.birth)
 #' 
 #' # Bifurcations
-#' # Uncomment the following lines:
+#' # Uncomment the following lines (running it takes more than a few seconds):
 #' # bifurcation <- SIRSinusoidalBirth(pars = parameters2,
 #' #                                   init = initials, 
 #' #                                   time = 0:(20 * 365))
+#' # PlotMods(bifur, bifur = TRUE)
 SIRSinusoidalBirth <- function(pars = NULL, init = NULL, time = NULL, ...) {
   if (is.null(pars)) {
     stop("undefined 'pars'")

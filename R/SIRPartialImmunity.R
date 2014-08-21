@@ -20,10 +20,11 @@
 #' initials <- c(NSS = 0.1, NIS = 1e-4, NRS = 0.02, NRI = 0,
 #'               NSI = 1e-4, NSR = 0.5, NIR = 0, NRR = 0.3798)
 #' 
-#' # Solve the system.
+#' # Solve and plot.
 #' sir.partial.immunity <- SIRPartialImmunity(pars = parameters, 
 #'                                            init = initials,
 #'                                            time = 0:(100 * 365))
+#' PlotMods(sir.partial.immunity, variables = c('NIS', 'NIR'), grid = FALSE)
 #'                                       
 SIRPartialImmunity <- function(pars = NULL, init = NULL, time = NULL, ...) {
   if (is.null(pars)) {

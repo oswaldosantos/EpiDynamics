@@ -30,11 +30,13 @@ parameters <- c(beta = rep(40, 4), gamma = rep(9.98, 4),
 
 initials <- c(S = c(0.08, 0.1, 0.1, 0.11),
                        P = c(0.4, 0.3, 0.3, 0.29),
-                       L1 = c(0.15, 0.02, 0.1, 0.01))
+                       L = c(0.15, 0.02, 0.1, 0.01))
 
+# Solve and plot.
 mlti.strain.pi <- MultiStrainPartialImmunity(pars = parameters,
                                              init = initials,
                                              time = 0:200)
+PlotMods(mlti.strain.pi, variables = c('L1', 'L2', 'L3', 'L4'), grid = FALSE)
 }
 \references{
 Keeling, Matt J., and Pejman Rohani. Modeling infectious diseases in humans and animals. Princeton University Press, 2008.

@@ -8,7 +8,7 @@ SIRBirthDeath(pars = NULL, init = NULL, time = NULL, ...)
 \arguments{
 \item{pars}{\code{\link{vector}} with 3 values: the per capita death rate (equal to the population level birth rate), the transmission rate, and the recovery rate. The names of these values must be "mu", "beta", and "gamma", respectively.}
 
-\item{init}{\code{\link{vector}} with 3 values: the initial proportion of proportion of susceptibles, infectious and recovered. The names of these values must be "S", "I" and "R", respectively. All parameters must be positive and S + I + 0 <= 1.}
+\item{init}{\code{\link{vector}} with 3 values: the initial proportion of proportion of susceptibles, infectious and recovered. The names of these values must be "S", "I" and "R", respectively.}
 
 \item{time}{time sequence for which output is wanted; the first value of times must be the initial time.}
 
@@ -22,6 +22,8 @@ Solves a simple SIR model with equal births and deaths.
 }
 \details{
 This is the R version of program 2.2 from page 27 of "Modeling Infectious Disease in humans and animals" by Keeling & Rohani.
+
+All parameters must be positive and S + I + R <= 1.
 }
 \examples{
 # Parameters and initial conditions.
@@ -29,9 +31,10 @@ parameters <- c(mu = 1 / (70 * 365),
                        beta = 520 / 365, gamma = 1 / 7)
 initials <- c(S = 0.1, I = 1e-4, R = 1 - 0.1 - 1e-4)
 
-# Solve the system.
+# Solve and plot.
 sir.birth.death <- SIRBirthDeath(pars = parameters, init = initials,
                                  time = 0:(60 * 365))
+PlotMods(sir.birth.death)
 }
 \references{
 Keeling, Matt J., and Pejman Rohani. Modeling infectious diseases in humans and animals. Princeton University Press, 2008.

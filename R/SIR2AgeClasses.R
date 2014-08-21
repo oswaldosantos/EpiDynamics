@@ -16,11 +16,12 @@
 #'                 gamma = 10, lC = 0.0666667, muC = 0.0, muA = 0.016667)
 #' initials <- c(SC = 0.1, IC = 0.0001, SA = 0.1, IA = 0.0001)
 #' 
-#' # Solve the system.
-#' sir.2.age.classes <- SIR2AgeClasses(pars = parameters, 
+#' # Solve and plot.
+#' sir2AgeClasses <- sir2AgeClasses(pars = parameters, 
 #'                           init = initials, time = seq(0, 100, 0.01))
+#' PlotMods(sir2AgeClasses, variables = c('IA', 'IC'), grid = FALSE)
 #' 
-SIR2AgeClasses <- function(pars = NULL, init = NULL, time = NULL, ...) {
+sir2AgeClasses <- function(pars = NULL, init = NULL, time = NULL, ...) {
   if (is.null(pars)) {
     stop("undefined 'pars'")
   }

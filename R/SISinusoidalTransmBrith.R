@@ -17,11 +17,12 @@
 #'                    K = 10000)
 #' initials <- c(X = 0.5, Y = 0.01, N = 0.6)
 #' 
-#' # Solve the system.
+#' # Solve and plot.
 #' sis.rhdm <- SISinusoidalTransmBrith(pars = parameters,
 #'                                     init = initials,
 #'                                     time = 0:(60 * 365))
-#'                        
+#' PlotMods(sis.rhdm)
+#'                         
 SISinusoidalTransmBrith <- function(pars = NULL, init = NULL, time = NULL, ...) {
   if (is.null(pars)) {
     stop("undefined 'pars'")

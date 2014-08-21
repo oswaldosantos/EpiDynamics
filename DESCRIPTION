@@ -8,14 +8,14 @@ Imports:
     reshape2,
     ggplot2,
     grid
-Description: Models of infectious diseases in humans and animals, based on
-    ordinary differential equations.
+Description: Mathematical models of infectious diseases in humans and animals.
+    Both, deterministic and stochastic models can be simulated and plotted.
 License: GPL (>= 2)
 LazyLoad: yes
 URL: https://github.com/oswaldosantos/EpiDynamics
-Authors@R: c(person(given='Oswaldo', family='Santos',
+Authors@R: c(person(given='Oswaldo', family='Santos Baquero',
     email='oswaldosant@gmail.com', role=c("aut", "cre")),
     person(given='Fernando', family='Silveira Marques',
     email='fernandosix@gmail.com', role="aut"))
-Version: 0.1.2
-Date: 2014-08-13
+Version: 0.2
+Date: 2014-08-21

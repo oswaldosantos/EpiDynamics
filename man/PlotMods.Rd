@@ -5,7 +5,7 @@
 \usage{
 PlotMods(model.out = NULL, variables = NULL, x.label = NULL,
   y.label = NULL, legend.title = "variable", line.size = 1,
-  text.size = 14, grid = T, bifur = F)
+  text.size = 14, grid = TRUE, bifur = FALSE)
 }
 \arguments{
 \item{model.out}{output of aEpiDynamics' function.}
@@ -51,6 +51,6 @@ parameters2 <- list(beta0 = 17 / 13, beta1 = seq(0.001, 0.251, by = 0.001),
 # bifur <- SIRSinusoidalForcing(pars = parameters2,
 #                               init = initials,
 #                               time = 0:(20 * 365))
-# PlotMods(bifur, bifur = T)
+# PlotMods(bifur, bifur = TRUE)
 }
 

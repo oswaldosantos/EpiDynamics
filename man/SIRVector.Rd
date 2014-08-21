@@ -32,10 +32,11 @@ parameters <- c(muH = 5.5e-5, muM = 0.143,
 
 initials <- c(XH = 1e3, XM = 1e4, YH = 1, YM = 1)
 
-# Solve the system.
+# Solve and plot.
 sir.vector <- SIRVector(pars = parameters,
                         init = initials,
                         time = 0:1000)
+PlotMods(sir.vector)
 }
 \references{
 Keeling, Matt J., and Pejman Rohani. Modeling infectious diseases in humans and animals. Princeton University Press, 2008.

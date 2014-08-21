@@ -12,15 +12,16 @@
 #' @export
 #' @examples 
 #' # Parameters and initial conditions.
-#' parameters <- c(rho = 0.5,mu = 1 / (70 * 365.0),nu= 1 / (70 * 365.0),
+#' parameters <- c(rho = 0.5, mu = 1 / (70 * 365), nu = 1 / (70 * 365),
 #'                       beta = 520 / 365.0, gamma = 1 / 7)
-#' initials <- c(X = 0.2, Y = 1e-4, Z = 1 - 0.2 - 1e-4)
+#' initials <- c(X = 0.2, Y = 1e-4, Z = 0)
 #' 
-#' # Solve the system.
-#' # Uncomment the following lines:
+#' # Solve and plot.
+#' # Uncomment the following lines (running it takes more than a few seconds):
 #' # sir.induced.mortality <- SIRInducedMortality(pars = parameters, 
 #' #                                  init = initials, 
 #' #                                  time = 0:1e5)
+#' # PlotMods(sir.induced.mortality)
 #'                                  
 SIRInducedMortality <- function(pars = NULL, init = NULL, time = NULL, ...) {
   if (is.null(pars)) {
@@ -35,23 +36,23 @@ SIRInducedMortality <- function(pars = NULL, init = NULL, time = NULL, ...) {
   function1 <- function(pars = NULL, init = NULL, time = NULL) {
     function2 <- function(time, init, pars) {
       with(as.list(c(init, pars)), {
-        dX = nu - beta * X * Y - mu * X
-        dY = beta * X * Y - ((gamma + mu) / (1 - rho)) * Y
-        dZ = gamma * Y - mu * Z
+        dX <- nu - beta * X * Y - mu * X
+        dY <- beta * X * Y - ((gamma + mu) / (1 - rho)) * Y
+        dZ <- gamma * Y - mu * Z
         list(c(dX, dY, dZ))
       })
     }
     init <- c(init['X'], init['Y'], init['Z'])
     output <- ode(times = time, 
-                          func = function2, 
-                          y = init, parms = pars, ...)
+                  func = function2, 
+                  y = init, parms = pars, ...)
     return(output)
   }
   
   output <- function1(pars = pars, init = init, time = time)
   return(list(model = function1,
-                     pars = pars,
-                     init = init,
-                     time = time,
-                     results = as.data.frame(output)))
+              pars = pars,
+              init = init,
+              time = time,
+              results = as.data.frame(output)))
 }

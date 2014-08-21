@@ -31,11 +31,13 @@ parameters <- list(beta = 17 / 5, gamma = 1 / 13, mu = 1 / (55 * 365),
 
 initials <- c(S = 0.05, I = 0.00001 * rep(1, n) / n)
 
-# Solve the system.
-# Uncomment the following lines:
-#seir.n.stages <- SEIRnStages(pars = parameters,
+# Solve and plot.
+# Uncomment the following lines (running it takes more than a few seconds):
+# seir.n.stages <- SEIRnStages(pars = parameters,
 #                              init = initials,
-#                              time = seq(1, 30*365, 1))
+#                              time = seq(1, 30 * 365, 1))
+# PlotMods(seir.n.stages, variables = 2)
+# PlotMods(seir.n.stages, variables = 3:13, grid = F)
 }
 \references{
 Keeling, Matt J., and Pejman Rohani. Modeling infectious diseases in humans and animals. Princeton University Press, 2008.

@@ -8,7 +8,7 @@ SIR(pars = NULL, init = NULL, time = NULL, ...)
 \arguments{
 \item{pars}{\code{\link{vector}} with 2 values: the transmission and recovery rates. The names of these values must be "beta", and "gamma", respectively.}
 
-\item{init}{\code{\link{vector}} with 3 values: the initial proportion of susceptibles, infectious and recovered. The names of these values must be "S", "I" and "R", respectively. All parameters must be positive and S + I + R <= 1.}
+\item{init}{\code{\link{vector}} with 3 values: the initial proportion of susceptibles, infectious and recovered. The names of these values must be "S", "I" and "R", respectively.}
 
 \item{time}{time sequence for which output is wanted; the first value of times must be the initial time.}
 
@@ -22,14 +22,17 @@ Solves a simple SIR model without births or deaths.
 }
 \details{
 This is the R version of program 2.1 from page 19 of "Modeling Infectious Disease in humans and animals" by Keeling & Rohani.
+
+All parameters must be positive and S + I + R <= 1.
 }
 \examples{
 # Parameters and initial conditions.
 parameters <- c(beta = 1.4247, gamma = 0.14286)
-initials <- c(S = 1 - 1e-06, I = 1e-06, R = 0)
+initials <- c(S = 1 - 1e-06, I = 1e-06, R = 1 - 1e-06 - 1e-06)
 
-# Solve the system.
+# Solve and plot.
 sir <- SIR(pars = parameters, init = initials, time = 0:70)
+PlotMods(sir)
 }
 \references{
 Keeling, Matt J., and Pejman Rohani. Modeling infectious diseases in humans and animals. Princeton University Press, 2008.

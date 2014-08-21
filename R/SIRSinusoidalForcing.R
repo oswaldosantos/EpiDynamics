@@ -20,19 +20,21 @@
 #' initials <- c(S = 1 / 17, I = 1e-4, 
 #'               R = 1 - 1 / 17 - 1e-4)
 #' 
-#' # Solve the system.
+#' # Solve and plot.
 #' sir.sinusoidal.forcing <- SIRSinusoidalForcing(pars = parameters, 
 #'                                                init = initials, 
 #'                                                time = 0:(60 * 365))
-#'                                                
+#' PlotMods(sir.sinusoidal.forcing)
+#'
 #' # Solve bifurcation dynamics for 20 years.
 #' # If max(time) < 3650, bifurcation dynamics are solved for 3650 time-steps.
 #' parameters2 <- list(beta0 = 17 / 13, beta1 = seq(0.001, 0.251, by = 0.001),
 #'                    gamma = 1 / 13, omega = 2 * pi / 365, mu = 1 / (50 * 365))
-#' # Uncomment the following lines:
+#' # Uncomment the following lines (running it takes more than a few seconds):
 #' # bifur <- SIRSinusoidalForcing(pars = parameters2, 
 #' #                               init = initials,
 #' #                               time = 0:(20 * 365))
+#' # PlotMods(bifur, bifur = TRUE)
 #' 
 SIRSinusoidalForcing <- function(pars = NULL, init = NULL, time = NULL, ...) {
   if (is.null(pars)) {

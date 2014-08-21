@@ -6,7 +6,7 @@
 SEIR4AgeClasses(pars = NULL, init = NULL, time = NULL, ...)
 }
 \arguments{
-\item{pars}{\code{\link{list}} with: a matrix with the transmission rates, the rate at which individuals move from the exposed to the infectious classes, the recovery rate, a \code{\link{vector}} with death rates in each age group, and a \code{\link{vector}} with birth rates into the childhood class. The names of these elements must be "beta", "sigma", "gamma", "mu", and "nu", respectively, see example. All rates are specified in days. Moreover, a \code{\link{vector}} n with the proportion of each age group. All parameters must be positive.}
+\item{pars}{\code{\link{list}} with: a matrix with the transmission rates, the rate at which individuals move from the exposed to the infectious classes, the recovery rate, a \code{\link{vector}} with death rates in each age group, and a \code{\link{vector}} with birth rates into the childhood class. The names of these elements must be "beta", "sigma", "gamma", "mu", and "nu", respectively, see example.}
 
 \item{init}{\code{\link{vector}} with 16 values: initial proportions of the population that are susceptible, exposed, infectious and recovered in a particular age group. The vector must be named, see example. Requirements: S + E + I <= n  for each age group and all values must be positive.}
 
@@ -22,10 +22,11 @@ Solves a SEIR model with four different age-groups and yearly "movements" betwee
 }
 \details{
 This is the R version of program 3.4 from page 87 of "Modeling Infectious Disease in humans and animals" by Keeling & Rohani.
+
+All rates are specified in days. Moreover, a \code{\link{vector}} n with the proportion of each age group. All parameters must be positive.
 }
 \examples{
 # Parameters and initial conditions.
-
 parameters <- list(beta = matrix(c(2.089, 2.089, 2.086, 2.037,
                                    2.089, 9.336, 2.086, 2.037,
                                    2.086, 2.086, 2.086, 2.037,
@@ -41,11 +42,13 @@ initials <- c(S = c(0.05, 0.01, 0.01, 0.008),
               I = c(0.0001, 0.0001, 0.0001, 0.0001),
               R = c(0.0298, 0.04313333, 0.12313333, 0.72513333))
 
-# Solve the system.
-# Uncomment the following lines:
+# Solve and plot.
+# Uncomment the following lines (running it takes more than a few seconds):
 # seir4.age.classes <- SEIR4AgeClasses(pars = parameters,
 #                                      init = initials,
 #                                      time = 0:36500)
+# PlotMods(seir4.age.classes,
+#          variables = c('I1', 'I2', 'I3', 'I4'), grid = F)
 }
 \references{
 Keeling, Matt J., and Pejman Rohani. Modeling infectious diseases in humans and animals. Princeton University Press, 2008.

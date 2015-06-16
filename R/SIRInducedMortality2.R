@@ -14,7 +14,7 @@
 #' # Parameters and initial conditions.
 #' parameters<- c(rho = 0.5,mu = 1 / (70 * 365.0),nu= 1 / (70 * 365.0),
 #'                       beta = 520 / 365.0, gamma = 1 / 7)
-#' initials <- c(X = 0.2, Y = 1e-4, Z = 0)
+#' initials <- c(X = 0.2, Y = 1e-4, Z = 1 - 0.2 - 1e-4)
 #' 
 #' # Solve and plot.
 #' sir.induced.mortality2 <- SIRInducedMortality2(pars = parameters, 

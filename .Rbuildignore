@@ -1,4 +1,4 @@
-^.*\.Rproj$
+\.Rproj
 ^\.Rproj\.user$
 dev_tools
 .gitignore

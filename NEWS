@@ -1,3 +1,10 @@
+EpiDynamics 0.3.0
+=================
+
+* Imports: for grid package, just used function are imported instead of the all package.
+
+* SIR: Corrected value for argument `R` in the example.
+
 EpiDynamics 0.2
 ===============
 

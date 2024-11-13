@@ -29,10 +29,10 @@ MultiStrainPartialImmunity <- function(pars = NULL, init = NULL, time = NULL, ..
   if (is.null(pars)) {
     stop("undefined 'pars'")
   }
-  if (is.null(pars)) {
+  if (is.null(init)) {
     stop("undefined 'inits'")
   }
-  if (is.null(pars)) {
+  if (is.null(time)) {
     stop("undefined 'time'")
   }
   function1 <- function(pars = NULL, init = NULL, time = NULL) {
